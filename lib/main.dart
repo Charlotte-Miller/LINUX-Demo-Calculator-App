@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage>
                             )
                     ),
 
-//                    Display calculations
+//                    Display expressions
                     new Container(
 
                             alignment: Alignment.centerRight,
@@ -176,12 +176,11 @@ class _MyHomePageState extends State<MyHomePage>
         }
         else if (buttonText == "+"
                 || buttonText == "-")
-//                || buttonText == "*"
-//                || buttonText == "/")
         {
             operand = buttonText;
             firstNumber = num.parse(output);
             calculatedValue = "";
+            expressions += " ${operand} ";
         }
         else if (buttonText == "*"
                 || buttonText == "/")
@@ -190,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage>
             firstNumber = num.parse(output);
             calculatedValue = "";
 
-            if (expressions.length > 1)
+            if (expressions.contains("+") || expressions.contains("-"))
             {
                 expressions = "(${expressions}) ${operand} ";
             }
@@ -252,7 +251,6 @@ class _MyHomePageState extends State<MyHomePage>
             else
             {
                 num finalOutput = num.parse(calculatedValue);
-//                int temp = int.parse(calculatedValue);
 
                 if (finalOutput is int) //Check if output is an integer
                 {
