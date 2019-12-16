@@ -19,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage>
     String output = "";
     String expressions = "";
 
-    String calculatedValue = "0";
+    String calculatedValue = "";
     num firstNumber = 0;
     num secondNumber = 0;
     String operand = "";
@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage>
                 || buttonText == "-")
         {
             operand = buttonText;
-            firstNumber = num.parse(output);
+            firstNumber = num.parse(calculatedValue);
             calculatedValue = "";
             expressions += " ${operand} ";
         }
@@ -175,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage>
         }
         else if (buttonText == "=")
         {
-            secondNumber = num.parse(output);
+            secondNumber = num.parse(calculatedValue);
 
             switch (operand)
             {
