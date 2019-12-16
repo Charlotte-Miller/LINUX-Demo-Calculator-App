@@ -54,11 +54,12 @@ class MyHomePage extends StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage>
 {
-    String output = "0";
+    String output = "";
+    String calculations = "";
 
-    String _output = "0";
-    double firstNumber = 0.0;
-    double secondNumber = 0.0;
+    String calculatedValue = "0";
+    num firstNumber = 0;
+    num secondNumber = 0;
     String operand = "";
 
     @override
@@ -72,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage>
 
                 child: new Column(children: <Widget>[
 
-//                    Phạm Trung Hiếu
+//Phạm Trung Hiếu
 //                    Showing answer field
                     new Container(
 
@@ -87,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage>
 //                            Modify answer's field style
                             child: new Text(output,
                                 style: new TextStyle(
-                                        fontSize: 48.0,
+                                        fontSize: 80.0,
                                         fontWeight: FontWeight.bold
                                 ),
                             )
@@ -101,24 +102,14 @@ class _MyHomePageState extends State<MyHomePage>
                     ),
 
 //                    Build number rows
-                    buildRowOf4('7', '8', '9', '/'),
-                    buildRowOf4('4', '5', '6', '*'),
-                    buildRowOf4('1', '2', '3', '-'),
-                    buildRowOf4('000', '0', '.', '+'),
-                    buildRowOf2('AC', '=')
+                    buildRowOf4('AC', '+/-', '%', '/'),
+                    buildRowOf4('7', '8', '9', '*'),
+                    buildRowOf4('4', '5', '6', '/'),
+                    buildRowOf4('1', '2', '3', '+'),
+                    buildRowOf4('000', '0', '.', '='),
 
                 ],),
             ),
-        );
-    }
-
-    Row buildRowOf2(String first, second)
-    {
-        return new Row(
-                children: [
-                    buildButton(first),
-                    buildButton(second),
-                ]
         );
     }
 
@@ -164,7 +155,6 @@ class _MyHomePageState extends State<MyHomePage>
         if (buttonText == "AC")
         {
             reset();
-            _output = "0";
         }
         else if (buttonText == "+"
                 || buttonText == "-"
@@ -172,60 +162,81 @@ class _MyHomePageState extends State<MyHomePage>
                 || buttonText == "/")
         {
             operand = buttonText;
-            firstNumber = double.parse(output);
-            _output = "0";
+            firstNumber = num.parse(output);
+            calculatedValue = "0";
         }
         else if (buttonText == ".")
         {
-            if (_output.contains("."))
+            if (calculatedValue.contains("."))
             {
                 print("You already pressed the dot button");
                 return;
             }
             else
             {
-                _output += buttonText;
+                calculatedValue += buttonText;
             }
         }
         else if (buttonText == "=")
         {
-            secondNumber = double.parse(output);
+            secondNumber = num.parse(output);
 
             switch (operand)
             {
                 case "+":
-                    _output = (firstNumber + secondNumber).toString();
+                    calculatedValue = (firstNumber + secondNumber).toString();
                     break;
 
                 case "-":
-                    _output = (firstNumber - secondNumber).toString();
+                    calculatedValue = (firstNumber - secondNumber).toString();
                     break;
 
                 case "*":
-                    _output = (firstNumber * secondNumber).toString();
+                    calculatedValue = (firstNumber * secondNumber).toString();
                     break;
 
                 case "/":
-                    _output = (firstNumber / secondNumber).toString();
+                    calculatedValue = (firstNumber / secondNumber).toString();
                     break;
             }
-            reset();
+//            reset();
         }
-        else
+        else //when press in number buttons
         {
-            _output += buttonText;
+            calculatedValue += buttonText;
         }
 
-        print(_output);
+        print(calculatedValue);
 
         setState(()
         {
-            output = double.parse(_output).toStringAsFixed(2);
+            if (calculatedValue == "")
+            {
+                output = calculatedValue;
+            }
+            else
+            {
+                num finalOutput = num.parse(calculatedValue);
+//                int temp = int.parse(calculatedValue);
+
+                if (finalOutput is int) //Check if output is an integer
+                {
+                    output = finalOutput.toStringAsFixed(0);
+                }
+                else
+                {
+                    num roundedOutput = num.parse(finalOutput
+                            .toStringAsFixed(2)); //round the output to 2 digits after decimal point
+                    output = roundedOutput.toString();
+                }
+            }
         });
     }
 
     void reset()
     {
+        output = "";
+        calculatedValue = "";
         firstNumber = 0.0;
         secondNumber = 0.0;
         operand = "";
