@@ -55,7 +55,7 @@ class MyHomePage extends StatefulWidget
 class _MyHomePageState extends State<MyHomePage>
 {
     String output = "";
-    String calculations = "";
+    String expressions = "";
 
     String calculatedValue = "0";
     num firstNumber = 0;
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage>
                 child: new Column(children: <Widget>[
 
 //Phạm Trung Hiếu
-//                    Showing answer field
+//                    Display answer field
                     new Container(
 
                             alignment: Alignment.centerRight,
@@ -90,6 +90,24 @@ class _MyHomePageState extends State<MyHomePage>
                                 style: new TextStyle(
                                         fontSize: 80.0,
                                         fontWeight: FontWeight.bold
+                                ),
+                            )
+                    ),
+
+//                    Display calculations
+                    new Container(
+
+                            alignment: Alignment.centerRight,
+
+//                        Modify calculations' field margin
+                            padding: new EdgeInsets.symmetric(
+                                    horizontal: 12.0
+                            ),
+
+//                            Modify calculations' field style
+                            child: new Text(expressions,
+                                style: new TextStyle(
+                                    fontSize: 40.0,
                                 ),
                             )
                     ),
@@ -157,13 +175,29 @@ class _MyHomePageState extends State<MyHomePage>
             reset();
         }
         else if (buttonText == "+"
-                || buttonText == "-"
-                || buttonText == "*"
+                || buttonText == "-")
+//                || buttonText == "*"
+//                || buttonText == "/")
+        {
+            operand = buttonText;
+            firstNumber = num.parse(output);
+            calculatedValue = "";
+        }
+        else if (buttonText == "*"
                 || buttonText == "/")
         {
             operand = buttonText;
             firstNumber = num.parse(output);
-            calculatedValue = "0";
+            calculatedValue = "";
+
+            if (expressions.length > 1)
+            {
+                expressions = "(${expressions}) ${operand} ";
+            }
+            else
+            {
+                expressions += " ${operand} ";
+            }
         }
         else if (buttonText == ".")
         {
@@ -175,6 +209,7 @@ class _MyHomePageState extends State<MyHomePage>
             else
             {
                 calculatedValue += buttonText;
+                expressions += buttonText;
             }
         }
         else if (buttonText == "=")
@@ -199,11 +234,11 @@ class _MyHomePageState extends State<MyHomePage>
                     calculatedValue = (firstNumber / secondNumber).toString();
                     break;
             }
-//            reset();
         }
         else //when press in number buttons
         {
             calculatedValue += buttonText;
+            expressions += buttonText;
         }
 
         print(calculatedValue);
@@ -235,6 +270,7 @@ class _MyHomePageState extends State<MyHomePage>
 
     void reset()
     {
+        expressions = "";
         output = "";
         calculatedValue = "";
         firstNumber = 0.0;
