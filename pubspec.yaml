@@ -17,6 +17,8 @@ environment:
   sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
+  intl: "^0.15.6"
+
   flutter:
     sdk: flutter
 

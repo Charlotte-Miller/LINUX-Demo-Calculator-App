@@ -1,27 +1,6 @@
 import 'package:flutter/material.dart';
-
-//Phạm Khánh Nam
-
-//Build custom colors base on this site: https://coolors.co/063f21-8ab62d-708e30-d1d44a-698a32
-const Map<int, Color> CUSTOM_COLOR =
-{
-    50: Color.fromRGBO(105, 138, 50, .1),
-    100: Color.fromRGBO(105, 138, 50, .2),
-    200: Color.fromRGBO(105, 138, 50, .3),
-    300: Color.fromRGBO(105, 138, 50, .4),
-    400: Color.fromRGBO(105, 138, 50, .5),
-    500: Color.fromRGBO(105, 138, 50, .6),
-    600: Color.fromRGBO(105, 138, 50, .7),
-    700: Color.fromRGBO(105, 138, 50, .8),
-    800: Color.fromRGBO(105, 138, 50, .9),
-    900: Color.fromRGBO(105, 138, 50, 1),
-};
-
-const MaterialColor MAXIMUM_GREEN = MaterialColor(0xFF698A32, CUSTOM_COLOR);
-const MaterialColor MAXIMUM_GREEN_YELLOW = MaterialColor(0xFFD1D44A, CUSTOM_COLOR);
-const MaterialColor OLIVE_DRAB = MaterialColor(0xFF708E30, CUSTOM_COLOR);
-const MaterialColor YELLOW_GREEN = MaterialColor(0xFF8AB62D, CUSTOM_COLOR);
-const MaterialColor UP_FOREST_GREEN = MaterialColor(0xFF063F21, CUSTOM_COLOR);
+import "package:intl/intl.dart";
+import 'ColorScheme.dart';
 
 void main()
 => runApp(MyApp());
@@ -251,16 +230,19 @@ class _MyHomePageState extends State<MyHomePage>
             else
             {
                 num finalOutput = num.parse(calculatedValue);
+//                var formatter = new NumberFormat.currency();
 
                 if (finalOutput is int) //Check if output is an integer
                 {
-                    output = finalOutput.toStringAsFixed(0);
+//                    output = formatter.format(finalOutput.toString());
+                    output = finalOutput.toString();
                 }
                 else
                 {
                     num roundedOutput = num.parse(finalOutput
                             .toStringAsFixed(2)); //round the output to 2 digits after decimal point
-                    output = roundedOutput.toString();
+//                    output = formatter.format(roundedOutput.toString());
+                    output = (roundedOutput.toString());
                 }
             }
         });
