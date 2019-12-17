@@ -7,7 +7,9 @@ import 'ColorScheme.dart';
 String output = "";
 String expressions = "";
 
-bool euqalButtonPressed = false;
+bool equalButtonPressed = false;
+
+var numbers = new RegExp(r'[0-9]');
 
 String calculatedValue = "";
 num firstNumber = 0;
@@ -84,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage>
                     ),
 
 //                    Build number rows
-                    buildRowOf4('AC', '+/-', '%', '/'),
+                    buildRowOf4('AC', '^', '%', '/'),
                     buildRowOf4('7', '8', '9', '*'),
                     buildRowOf4('4', '5', '6', '/'),
                     buildRowOf4('1', '2', '3', '+'),
@@ -175,9 +177,9 @@ class _MyHomePageState extends State<MyHomePage>
                 expressions += buttonText;
             }
         }
-        else if (buttonText == "=" && !euqalButtonPressed)
+        else if (buttonText == "=" && !equalButtonPressed)
         {
-            euqalButtonPressed = true; //to block spamming press "=" button that leads to misleading output display
+            equalButtonPressed = true; //to block spamming press "=" button that leads to misleading output display
 
             secondNumber = num.parse(calculatedValue);
 
@@ -200,7 +202,14 @@ class _MyHomePageState extends State<MyHomePage>
                     break;
             }
         }
-        else if (buttonText != "=") //when press in number buttons
+        else if (equalButtonPressed && buttonText.contains(numbers))
+        {
+            reset();
+
+            calculatedValue += buttonText;
+            expressions += buttonText;
+        }
+        else if (buttonText != "=") //when press number buttons
         {
             calculatedValue += buttonText;
             expressions += buttonText;
@@ -208,6 +217,11 @@ class _MyHomePageState extends State<MyHomePage>
 
         print(calculatedValue);
 
+        setDisplayState();
+    }
+
+    void setDisplayState()
+    {
         setState(()
         {
             if (calculatedValue == "")
@@ -241,6 +255,6 @@ class _MyHomePageState extends State<MyHomePage>
         firstNumber = 0.0;
         secondNumber = 0.0;
         operand = "";
-        euqalButtonPressed = false;
+        equalButtonPressed = false;
     }
 }
