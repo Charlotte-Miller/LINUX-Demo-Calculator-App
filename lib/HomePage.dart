@@ -7,6 +7,8 @@ import 'ColorScheme.dart';
 String output = "";
 String expressions = "";
 
+bool isCalculated = false;
+
 String calculatedValue = "";
 num firstNumber = 0;
 num secondNumber = 0;
@@ -173,8 +175,10 @@ class _MyHomePageState extends State<MyHomePage>
                 expressions += buttonText;
             }
         }
-        else if (buttonText == "=")
+        else if (buttonText == "=" && !isCalculated)
         {
+            isCalculated = true; //to block spamming press "=" button that leads to misleading output display
+
             secondNumber = num.parse(calculatedValue);
 
             switch (operand)
@@ -237,5 +241,6 @@ class _MyHomePageState extends State<MyHomePage>
         firstNumber = 0.0;
         secondNumber = 0.0;
         operand = "";
+        isCalculated = false;
     }
 }
