@@ -7,7 +7,7 @@ import 'ColorScheme.dart';
 String output = "";
 String expressions = "";
 
-bool isCalculated = false;
+bool euqalButtonPressed = false;
 
 String calculatedValue = "";
 num firstNumber = 0;
@@ -175,9 +175,9 @@ class _MyHomePageState extends State<MyHomePage>
                 expressions += buttonText;
             }
         }
-        else if (buttonText == "=" && !isCalculated)
+        else if (buttonText == "=" && !euqalButtonPressed)
         {
-            isCalculated = true; //to block spamming press "=" button that leads to misleading output display
+            euqalButtonPressed = true; //to block spamming press "=" button that leads to misleading output display
 
             secondNumber = num.parse(calculatedValue);
 
@@ -200,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage>
                     break;
             }
         }
-        else //when press in number buttons
+        else if (buttonText != "=") //when press in number buttons
         {
             calculatedValue += buttonText;
             expressions += buttonText;
@@ -241,6 +241,6 @@ class _MyHomePageState extends State<MyHomePage>
         firstNumber = 0.0;
         secondNumber = 0.0;
         operand = "";
-        isCalculated = false;
+        euqalButtonPressed = false;
     }
 }
