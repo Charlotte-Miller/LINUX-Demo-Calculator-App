@@ -4,6 +4,14 @@ import 'package:intl/intl.dart';
 
 import 'ColorScheme.dart';
 
+String output = "";
+String expressions = "";
+
+String calculatedValue = "";
+num firstNumber = 0;
+num secondNumber = 0;
+String operand = "";
+
 class MyHomePage extends StatefulWidget
 {
     MyHomePage({Key key, this.title}) : super(key: key);
@@ -16,14 +24,6 @@ class MyHomePage extends StatefulWidget
 
 class _MyHomePageState extends State<MyHomePage>
 {
-    String output = "";
-    String expressions = "";
-
-    String calculatedValue = "";
-    num firstNumber = 0;
-    num secondNumber = 0;
-    String operand = "";
-
     @override
     Widget build(BuildContext context)
     {
