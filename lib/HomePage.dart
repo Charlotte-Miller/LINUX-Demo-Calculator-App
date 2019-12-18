@@ -113,22 +113,22 @@ class _MyHomePageState extends State<MyHomePage>
     {
         return new Expanded(
             child: new MaterialButton(
-                    child: new Text(
-                        buttonNumber,
+                child: new Text(
+                    buttonNumber,
 
-                        style: new TextStyle(
-                                fontSize: 26.0,
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromRGBO(6, 63, 33, 100.0)
-                        ),
+                    style: new TextStyle(
+                            fontSize: 26.0,
+                            fontWeight: FontWeight.bold,
+//                            color: Color.fromRGBO(6, 63, 33, 100.0)
                     ),
+                ),
 
-                    onPressed: ()
-                    => handleButtonPressed(buttonNumber),
+                onPressed: ()
+                => handleButtonPressed(buttonNumber),
 
-                    color: YELLOW_GREEN,
-                    textColor: UP_FOREST_GREEN,
-                    height: 70
+                color: MAASTRICHT_BLUE,
+                textColor: BABY_POWDER,
+                height: 100,
             ),
         );
     }
@@ -201,6 +201,8 @@ class _MyHomePageState extends State<MyHomePage>
                     calculatedValue = (firstNumber / secondNumber).toString();
                     break;
             }
+
+            expressions += " =";
         }
         else if (equalButtonPressed && buttonText.contains(numbers))
         {
@@ -209,7 +211,7 @@ class _MyHomePageState extends State<MyHomePage>
             calculatedValue += buttonText;
             expressions += buttonText;
         }
-        else if (buttonText != "=") //when press number buttons
+        else if (buttonText.contains(numbers)) //when press number buttons
         {
             calculatedValue += buttonText;
             expressions += buttonText;

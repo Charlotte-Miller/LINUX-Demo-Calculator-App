@@ -17,9 +17,7 @@ const Map<int, Color> CUSTOM_COLOR =
     900: Color.fromRGBO(105, 138, 50, 1),
 };
 
-//Build custom colors base on this site: https://coolors.co/063f21-8ab62d-708e30-d1d44a-698a32
-const MaterialColor MAXIMUM_GREEN = MaterialColor(0xFF698A32, CUSTOM_COLOR);
-const MaterialColor MAXIMUM_GREEN_YELLOW = MaterialColor(0xFFD1D44A, CUSTOM_COLOR);
-const MaterialColor OLIVE_DRAB = MaterialColor(0xFF708E30, CUSTOM_COLOR);
-const MaterialColor YELLOW_GREEN = MaterialColor(0xFF8AB62D, CUSTOM_COLOR);
-const MaterialColor UP_FOREST_GREEN = MaterialColor(0xFF063F21, CUSTOM_COLOR);
+//Build custom colors base on this site: https://coolors.co/app/011627-fdfffc-2ec4b6-e71d36-ff9f1c
+const MaterialColor PRUSSIAN_BLUE = MaterialColor(0xFF022C4F, CUSTOM_COLOR);
+const MaterialColor MAASTRICHT_BLUE = MaterialColor(0xFF011F38, CUSTOM_COLOR);
+const MaterialColor BABY_POWDER = MaterialColor(0xFFFDFFFC, CUSTOM_COLOR);

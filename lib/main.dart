@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget
         return MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
-                primarySwatch: MAXIMUM_GREEN, //Theme Color
+                primarySwatch: PRUSSIAN_BLUE, //Theme Color
             ),
             home: MyHomePage(title: 'Green Family Calculator'),
         );
