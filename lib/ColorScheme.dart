@@ -20,4 +20,5 @@ const Map<int, Color> CUSTOM_COLOR =
 //Build custom colors base on this site: https://coolors.co/app/011627-fdfffc-2ec4b6-e71d36-ff9f1c
 const MaterialColor PRUSSIAN_BLUE = MaterialColor(0xFF022C4F, CUSTOM_COLOR);
 const MaterialColor MAASTRICHT_BLUE = MaterialColor(0xFF011F38, CUSTOM_COLOR);
+const MaterialColor DARK_IMPERIAL_BLUE = MaterialColor(0xFF033C6B, CUSTOM_COLOR);
 const MaterialColor BABY_POWDER = MaterialColor(0xFFFDFFFC, CUSTOM_COLOR);

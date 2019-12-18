@@ -104,12 +104,13 @@ class _MyHomePageState extends State<MyHomePage>
                     buildButton(first),
                     buildButton(second),
                     buildButton(thrid),
-                    buildButton(fourth)
+                    buildButton(fourth, backgroundColor: DARK_IMPERIAL_BLUE)
                 ]
         );
     }
 
-    Widget buildButton(String buttonNumber)
+    Widget buildButton(String buttonNumber,
+                       {MaterialColor backgroundColor = MAASTRICHT_BLUE, MaterialColor textColor = BABY_POWDER})
     {
         return new Expanded(
             child: new MaterialButton(
@@ -117,17 +118,16 @@ class _MyHomePageState extends State<MyHomePage>
                     buttonNumber,
 
                     style: new TextStyle(
-                            fontSize: 26.0,
-                            fontWeight: FontWeight.bold,
-//                            color: Color.fromRGBO(6, 63, 33, 100.0)
+                        fontSize: 26.0,
+                        fontWeight: FontWeight.bold,
                     ),
                 ),
 
                 onPressed: ()
                 => handleButtonPressed(buttonNumber),
 
-                color: MAASTRICHT_BLUE,
-                textColor: BABY_POWDER,
+                color: backgroundColor,
+                textColor: textColor,
                 height: 100,
             ),
         );
