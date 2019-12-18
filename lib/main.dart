@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget
             theme: ThemeData(
                 primarySwatch: PRUSSIAN_BLUE, //Theme Color
             ),
-            home: MyHomePage(title: 'Green Family Calculator'),
+            home: MyHomePage(title: 'VNB Calc-ulator'),
         );
     }
 }

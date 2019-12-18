@@ -22,3 +22,5 @@ const MaterialColor PRUSSIAN_BLUE = MaterialColor(0xFF022C4F, CUSTOM_COLOR);
 const MaterialColor MAASTRICHT_BLUE = MaterialColor(0xFF011F38, CUSTOM_COLOR);
 const MaterialColor DARK_IMPERIAL_BLUE = MaterialColor(0xFF033C6B, CUSTOM_COLOR);
 const MaterialColor BABY_POWDER = MaterialColor(0xFFFDFFFC, CUSTOM_COLOR);
+const MaterialColor RUBY_RED = MaterialColor(0xFF9E1424, CUSTOM_COLOR);
+

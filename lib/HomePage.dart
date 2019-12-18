@@ -85,8 +85,8 @@ class _MyHomePageState extends State<MyHomePage>
                         child: new Divider(),
                     ),
 
-//                    Build number rows
-                    buildRowOf4('AC', '^', '%', '/'),
+//                    Build button rows
+                    buildFirstRow(),
                     buildRowOf4('7', '8', '9', '*'),
                     buildRowOf4('4', '5', '6', '/'),
                     buildRowOf4('1', '2', '3', '+'),
@@ -97,13 +97,26 @@ class _MyHomePageState extends State<MyHomePage>
         );
     }
 
-    Row buildRowOf4(String first, second, thrid, fourth)
+//    Special row for AC button and some operator buttons
+    Row buildFirstRow()
+    {
+        return new Row(
+                children: [
+                    buildButton('AC', backgroundColor: RUBY_RED),
+                    buildButton('^', backgroundColor: DARK_IMPERIAL_BLUE),
+                    buildButton('%', backgroundColor: DARK_IMPERIAL_BLUE),
+                    buildButton('/', backgroundColor: DARK_IMPERIAL_BLUE)
+                ]
+        );
+    }
+
+    Row buildRowOf4(String first, second, third, fourth)
     {
         return new Row(
                 children: [
                     buildButton(first),
                     buildButton(second),
-                    buildButton(thrid),
+                    buildButton(third),
                     buildButton(fourth, backgroundColor: DARK_IMPERIAL_BLUE)
                 ]
         );
