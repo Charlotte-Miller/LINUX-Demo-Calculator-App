@@ -10,6 +10,7 @@ String expressions = "";
 bool equalButtonPressed = false;
 
 var numbers = new RegExp(r'[0-9]');
+var operators = new RegExp(r'/*-+^%');
 
 String calculatedValue = "";
 num firstNumber = 0;
@@ -88,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage>
 //                    Build button rows
                     buildFirstRow(),
                     buildRowOf4('7', '8', '9', '*'),
-                    buildRowOf4('4', '5', '6', '/'),
+                    buildRowOf4('4', '5', '6', '-'),
                     buildRowOf4('1', '2', '3', '+'),
                     buildRowOf4('000', '0', '.', '='),
 
@@ -123,7 +124,8 @@ class _MyHomePageState extends State<MyHomePage>
     }
 
     Widget buildButton(String buttonNumber,
-                       {MaterialColor backgroundColor = MAASTRICHT_BLUE, MaterialColor textColor = BABY_POWDER})
+                       {MaterialColor backgroundColor = MAASTRICHT_BLUE,
+                           MaterialColor textColor = BABY_POWDER})
     {
         return new Expanded(
             child: new MaterialButton(
@@ -149,6 +151,18 @@ class _MyHomePageState extends State<MyHomePage>
 //    Nguyễn Việt Hoàng
     handleButtonPressed(String buttonText)
     {
+//        if (equalButtonPressed && !buttonText.contains(numbers))
+//        {
+//            print("is running");
+//            equalButtonPressed = false;
+//
+//            firstNumber = num.tryParse(calculatedValue);
+//            calculatedValue = "";
+//            operand = "";
+//
+//            expressions = "${firstNumber} ${buttonText} ";
+//        }
+
         if (buttonText == "AC")
         {
             reset();
@@ -157,7 +171,7 @@ class _MyHomePageState extends State<MyHomePage>
                 || buttonText == "-")
         {
             operand = buttonText;
-            firstNumber = num.parse(calculatedValue);
+            firstNumber = num.tryParse(calculatedValue);
             calculatedValue = "";
             expressions += " ${operand} ";
         }
@@ -165,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage>
                 || buttonText == "/")
         {
             operand = buttonText;
-            firstNumber = num.parse(output);
+            firstNumber = num.tryParse(output);
             calculatedValue = "";
 
             if (expressions.contains("+") || expressions.contains("-"))
@@ -194,28 +208,9 @@ class _MyHomePageState extends State<MyHomePage>
         {
             equalButtonPressed = true; //to block spamming press "=" button that leads to misleading output display
 
-            secondNumber = num.parse(calculatedValue);
+            secondNumber = num.tryParse(calculatedValue);
 
-            switch (operand)
-            {
-                case "+":
-                    calculatedValue = (firstNumber + secondNumber).toString();
-                    break;
-
-                case "-":
-                    calculatedValue = (firstNumber - secondNumber).toString();
-                    break;
-
-                case "*":
-                    calculatedValue = (firstNumber * secondNumber).toString();
-                    break;
-
-                case "/":
-                    calculatedValue = (firstNumber / secondNumber).toString();
-                    break;
-            }
-
-            expressions += " =";
+            calculatedValue = getAnswerByOperand(operand);
         }
         else if (equalButtonPressed && buttonText.contains(numbers))
         {
@@ -224,6 +219,7 @@ class _MyHomePageState extends State<MyHomePage>
             calculatedValue += buttonText;
             expressions += buttonText;
         }
+
         else if (buttonText.contains(numbers)) //when press number buttons
         {
             calculatedValue += buttonText;
@@ -232,34 +228,62 @@ class _MyHomePageState extends State<MyHomePage>
 
         print(calculatedValue);
 
-        setDisplayState();
+        setDisplayState(calculatedValue);
     }
 
-    void setDisplayState()
+    String getAnswerByOperand(String operand)
+    {
+        print(operand);
+
+        switch (operand)
+        {
+            case "+":
+                return (firstNumber + secondNumber).toString();
+
+            case "-":
+                return (firstNumber - secondNumber).toString();
+
+            case "*":
+                return (firstNumber * secondNumber).toString();
+
+            case "/":
+                return (firstNumber / secondNumber).toString();
+
+            default:
+                return "Undifined operand";
+        }
+    }
+
+    void setDisplayState(String content)
     {
         setState(()
         {
-            if (calculatedValue == "")
+            output = getFormattedContent(content);
+        });
+    }
+
+    String getFormattedContent(answer)
+    {
+        if (answer == "")
+        {
+            return answer;
+        }
+        else
+        {
+            num finalOutput = num.tryParse(answer);
+            var formatter = new NumberFormat();
+
+            if (finalOutput is int) //Check if output is an integer
             {
-                output = calculatedValue;
+                return formatter.format(finalOutput);
             }
             else
             {
-                num finalOutput = num.parse(calculatedValue);
-                var formatter = new NumberFormat();
-
-                if (finalOutput is int) //Check if output is an integer
-                {
-                    output = formatter.format(finalOutput);
-                }
-                else
-                {
-                    num roundedOutput = num.parse(finalOutput
-                            .toStringAsFixed(2)); //round the output to 2 digits after decimal point
-                    output = formatter.format(roundedOutput);
-                }
+                num roundedOutput = num.tryParse(finalOutput
+                        .toStringAsFixed(2)); //round the output to 2 digits after decimal point
+                return formatter.format(roundedOutput);
             }
-        });
+        }
     }
 
     void reset()
