@@ -151,17 +151,13 @@ class _MyHomePageState extends State<MyHomePage>
 //    Nguyễn Việt Hoàng
     handleButtonPressed(String buttonText)
     {
-//        if (equalButtonPressed && !buttonText.contains(numbers))
-//        {
-//            print("is running");
-//            equalButtonPressed = false;
-//
-//            firstNumber = num.tryParse(calculatedValue);
-//            calculatedValue = "";
-//            operand = "";
-//
-//            expressions = "${firstNumber} ${buttonText} ";
-//        }
+
+        if (equalButtonPressed && !buttonText.contains(numbers))
+        {
+            equalButtonPressed = false;
+
+            expressions = calculatedValue;
+        }
 
         if (buttonText == "AC")
         {
@@ -210,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage>
 
             secondNumber = num.tryParse(calculatedValue);
 
-            calculatedValue = getAnswerByOperand(operand);
+            calculatedValue = getAnswerByOperand(firstNumber, secondNumber, operand);
         }
         else if (equalButtonPressed && buttonText.contains(numbers))
         {
@@ -219,7 +215,6 @@ class _MyHomePageState extends State<MyHomePage>
             calculatedValue += buttonText;
             expressions += buttonText;
         }
-
         else if (buttonText.contains(numbers)) //when press number buttons
         {
             calculatedValue += buttonText;
@@ -231,10 +226,8 @@ class _MyHomePageState extends State<MyHomePage>
         setDisplayState(calculatedValue);
     }
 
-    String getAnswerByOperand(String operand)
+    String getAnswerByOperand(num firstNumber, num secondNumber, String operand)
     {
-        print(operand);
-
         switch (operand)
         {
             case "+":
@@ -262,15 +255,15 @@ class _MyHomePageState extends State<MyHomePage>
         });
     }
 
-    String getFormattedContent(answer)
+    String getFormattedContent(content)
     {
-        if (answer == "")
+        if (content == "")
         {
-            return answer;
+            return content;
         }
         else
         {
-            num finalOutput = num.tryParse(answer);
+            num finalOutput = num.tryParse(content);
             var formatter = new NumberFormat();
 
             if (finalOutput is int) //Check if output is an integer
