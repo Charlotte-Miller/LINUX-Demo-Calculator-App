@@ -10,6 +10,8 @@ import 'ColorScheme.dart';
 String output = "";
 String expression = "";
 
+bool isCalculated = false;
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -118,16 +120,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
 //    Nguyễn Việt Hoàng
   handleButtonPressed(String buttonText) {
+    // Replace the precious expression with the previous result when move to the next calculation
+    if (isCalculated && buttonText != '=')
+    {
+      expression = output;
+      isCalculated = false;
+    }
+
     if (buttonText == 'AC') 
     {
       reset();
     } 
     else if (buttonText != '=') 
     {
-      expression += " $buttonText ";
+      expression += " $buttonText";
     } 
     else if (buttonText == '=') 
     {
+      isCalculated = true;
+
       double result = getResultBaseOnExpression(expression);
       output = getFormattedContent(result);
     }
