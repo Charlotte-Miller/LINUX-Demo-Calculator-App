@@ -121,10 +121,17 @@ class _MyHomePageState extends State<MyHomePage> {
 //    Nguyễn Việt Hoàng
   handleButtonPressed(String buttonText) {
     // Replace the precious expression with the previous result when move to the next calculation
-    if (isCalculated && buttonText != '=')
+    if (isCalculated)
     {
-      expression = output;
-      isCalculated = false;
+      if (buttonText.contains(new RegExp(r'[\+\-\*\/]')))
+      {
+        expression = output;
+        isCalculated = false;
+      }
+      else
+      {
+        reset();
+      }
     }
 
     if (buttonText == 'AC') 
@@ -149,6 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void reset() {
     expression = "";
     output = "";
+    isCalculated = false;
   }
 
   double getResultBaseOnExpression(String expression) {
